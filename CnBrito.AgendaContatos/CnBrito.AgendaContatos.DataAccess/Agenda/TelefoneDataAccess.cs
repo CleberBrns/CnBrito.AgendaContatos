@@ -32,6 +32,17 @@ namespace CnBrito.AgendaContatos.DataAccess.Agenda
             }
         }
 
+        public TelefoneModel GetTelefoneContato(int idContato, string telefone)
+        {
+            using (var context = new AgdCtContext())
+            {
+                return Mapper.Map<TelefoneModel>(
+                        context.Telefone.Where(f => f.IdContato == idContato &&
+                                                    f.Numero == telefone)
+                                       .FirstOrDefault());
+            }
+        }
+
         public List<TelefoneModel> ListTelefonesContato(int idContato)
         {
             using (var context = new AgdCtContext())

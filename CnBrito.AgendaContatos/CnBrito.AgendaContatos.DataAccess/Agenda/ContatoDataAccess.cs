@@ -13,6 +13,18 @@ namespace CnBrito.AgendaContatos.DataAccess.Agenda
     {
         public ContatoDataAccess(IMapper mapper) : base(mapper) { }
 
+        public ContatoModel Get(int id)
+        {
+            using (var context = new AgdCtContext())
+            {
+                return Mapper.Map<ContatoModel>(
+                        context.Contato.Where(f => f.Id == id)
+                                       .Include(c => c.Telefones)
+                                       .Include(c => c.Emails)
+                                       .FirstOrDefault());
+            }
+        }
+
         public ContatoModel GetContatoUsuario(int idUsuario)
         {
             using (var context = new AgdCtContext())
@@ -21,6 +33,17 @@ namespace CnBrito.AgendaContatos.DataAccess.Agenda
                         context.Contato.Where(f => f.IdUsuario == idUsuario)
                                        .Include(c => c.Telefones)
                                        .Include(c => c.Emails)
+                                       .FirstOrDefault());
+            }
+        }
+
+        public ContatoModel GetContatoUsuario(int idUsuario, string nome)
+        {
+            using (var context = new AgdCtContext())
+            {
+                return Mapper.Map<ContatoModel>(
+                        context.Contato.Where(f => f.IdUsuario == idUsuario &&
+                                                    f.Nome == nome)
                                        .FirstOrDefault());
             }
         }

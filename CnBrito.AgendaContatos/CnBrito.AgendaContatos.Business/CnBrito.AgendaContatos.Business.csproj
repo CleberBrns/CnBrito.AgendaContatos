@@ -41,12 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agenda\AgendaContatoBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuarios\UsuarioBusiness.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Agenda\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CnBrito.AgendaContatos.Business.Contract\CnBrito.AgendaContatos.Business.Contract.csproj">
       <Project>{41FBB5F0-DD63-4EC1-A39A-2FD3D191AE31}</Project>

@@ -33,6 +33,17 @@ namespace CnBrito.AgendaEmails.DataAccess.Agenda
             }
         }
 
+        public EmailModel GetEmailContato(int idContato, string email)
+        {
+            using (var context = new AgdCtContext())
+            {
+                return Mapper.Map<EmailModel>(
+                        context.Email.Where(f => f.IdContato == idContato &&
+                                                 f.Endereco == email)
+                                       .FirstOrDefault());
+            }
+        }
+
         public List<EmailModel> ListEmailsContato(int idContato)
         {
             using (var context = new AgdCtContext())

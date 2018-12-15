@@ -7,6 +7,7 @@ namespace CnBrito.AgendaContatos.Data.Contract.Agenda
     {
         EmailModel GetEmail(int id);
         EmailModel GetEmailContato(int idContato);
+        EmailModel GetEmailContato(int idContato, string email);
         List<EmailModel> ListEmailsContato(int idContato);
     }
 }

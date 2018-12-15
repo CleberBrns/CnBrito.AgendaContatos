@@ -61,7 +61,7 @@ namespace CnBrito.AgendaContatos.Business.Usuarios
             }
             else
             {
-                result.Message = "Não foi possível encontrar o usuário selecionado!";
+                result.Message = Constants.msgFalhaAoBuscar;
                 result.Status = false;
             }
 
@@ -85,12 +85,12 @@ namespace CnBrito.AgendaContatos.Business.Usuarios
                     model = _usuarioDataAccess.Salvar(model);
                     if (model.Id != 0)
                     {
-                        result.Message = "Usuário salvo com sucesso!";
+                        result.Message = Constants.msgSucessoSalvar;
                         result.Value = true;
                         result.Status = true;
                     }
                     else
-                        result.Message = "Falha ao salvar o Usuário!";
+                        result.Message = Constants.msgFalhaAoSalvar;
                 }
                 else
                 {
@@ -98,12 +98,12 @@ namespace CnBrito.AgendaContatos.Business.Usuarios
 
                     if (result.Value)
                     {
-                        result.Message = "Usuário atualizado com sucesso!";
+                        result.Message = Constants.msgSucessoAtualizar;
                         result.Value = true;
                         result.Status = true;
                     }
                     else
-                        result.Message = "Falha ao atualizar o Usuário!";
+                        result.Message = Constants.msgFalhaAoAtualizar;
                 }
             }
 
@@ -118,15 +118,15 @@ namespace CnBrito.AgendaContatos.Business.Usuarios
             var registro = _usuarioDataAccess.GetUsuario(idUsuario);
 
             if (registro != null)            
-                result.Value = _usuarioDataAccess.Excluir(registro);            
-           
+                result.Value = _usuarioDataAccess.Excluir(registro);
+
             if (result.Value)
             {
-                result.Message = "Usuário excluído com sucesso!";
+                result.Message = Constants.msgSucessoExcluir;
                 result.Status = true;
             }
             else
-                result.Message = "Falha ao excluir o Usuário!";
+                result.Message = Constants.msgFalhaAoExcluir;
 
             return result;
         }
