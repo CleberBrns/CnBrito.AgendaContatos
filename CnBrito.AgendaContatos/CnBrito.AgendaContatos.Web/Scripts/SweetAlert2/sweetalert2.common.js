@@ -2,11 +2,7 @@
  * sweetalert2 v7.0.4
  * Released under the MIT License.
  */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.Sweetalert2 = factory());
-}(this, (function () { 'use strict';
+'use strict';
 
 var defaultParams = {
   title: '',
@@ -1814,7 +1810,5 @@ sweetAlert.version = '7.0.4';
 
 sweetAlert.default = sweetAlert;
 
-return sweetAlert;
-
-})));
+module.exports = sweetAlert;
 if (typeof window !== 'undefined' && window.Sweetalert2) window.sweetAlert = window.swal = window.Sweetalert2;
