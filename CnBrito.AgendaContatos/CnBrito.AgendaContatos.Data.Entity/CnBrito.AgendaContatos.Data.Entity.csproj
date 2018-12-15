@@ -54,6 +54,10 @@
     <Compile Include="Mapping\Modelagem\Agenda\EmailMap.cs" />
     <Compile Include="Mapping\Modelagem\Agenda\TelefoneMap.cs" />
     <Compile Include="Mapping\Modelagem\Usuario\UsuarioMap.cs" />
+    <Compile Include="Migrations\201812151948493_Inicial.cs" />
+    <Compile Include="Migrations\201812151948493_Inicial.Designer.cs">
+      <DependentUpon>201812151948493_Inicial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modelagem\Agenda\Contato.cs" />
     <Compile Include="Modelagem\Agenda\Email.cs" />
@@ -66,6 +70,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812151948493_Inicial.resx">
+      <DependentUpon>201812151948493_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
