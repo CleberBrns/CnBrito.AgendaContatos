@@ -15,8 +15,7 @@ namespace CnBrito.AgendaContatos.Data.Entity.Mapping.Modelagem.Agenda
                 .HasMaxLength(20);
 
             Property(x => x.Descricao)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasMaxLength(50);                
 
             HasRequired(x => x.Contato)
                .WithMany(x => x.Telefones)
