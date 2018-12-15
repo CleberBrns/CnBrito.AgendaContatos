@@ -344,8 +344,12 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Default\styleImportant.css" />
+    <Content Include="Content\Default\tabsAgenda.css" />
+    <Content Include="Content\Default\tabsInicio.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\page-loader.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -443,6 +447,10 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Scripts\Default\ConfigsDataTable.js" />
+    <Content Include="Scripts\Default\Initial.js" />
+    <Content Include="Scripts\Default\tabs.js" />
+    <Content Include="Scripts\Default\Validacao.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -452,7 +460,16 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Mask\jquery.mask.js" />
+    <Content Include="Scripts\Mask\jquery.mask.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SweetAlert2\enhancers.js" />
+    <Content Include="Scripts\SweetAlert2\globalState.js" />
+    <Content Include="Scripts\SweetAlert2\instanceMethods.js" />
+    <Content Include="Scripts\SweetAlert2\privateProps.js" />
+    <Content Include="Scripts\SweetAlert2\staticMethods.js" />
+    <Content Include="Scripts\SweetAlert2\SweetAlert.js" />
+    <Content Include="Scripts\SweetAlert2\sweetalert2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -467,6 +484,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\SweetAlert2\variables.scss" />
+    <Content Include="Scripts\SweetAlert2\toasts.scss" />
+    <Content Include="Scripts\SweetAlert2\sweetalert2.scss" />
+    <Content Include="Scripts\SweetAlert2\mixins.scss" />
+    <Content Include="Scripts\SweetAlert2\animations.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
