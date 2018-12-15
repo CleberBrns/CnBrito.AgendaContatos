@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CnBrito.AgendaContatos.Busi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CnBrito.AgendaContatos.Business", "CnBrito.AgendaContatos.Business\CnBrito.AgendaContatos.Business.csproj", "{33759DE1-EFA8-4F49-8A22-19147AAC5F0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CnBrito.AgendaContatos.Config", "CnBrito.AgendaContatos.Config\CnBrito.AgendaContatos.Config.csproj", "{C40BDC6B-43E2-4EAB-9187-57F7D39B1181}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{33759DE1-EFA8-4F49-8A22-19147AAC5F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33759DE1-EFA8-4F49-8A22-19147AAC5F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33759DE1-EFA8-4F49-8A22-19147AAC5F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C40BDC6B-43E2-4EAB-9187-57F7D39B1181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C40BDC6B-43E2-4EAB-9187-57F7D39B1181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C40BDC6B-43E2-4EAB-9187-57F7D39B1181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C40BDC6B-43E2-4EAB-9187-57F7D39B1181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{EB6B24F2-1F6F-41B5-B6DE-002F567A5AF1} = {80F05DA0-4737-4CCB-B614-CB9F3C4BAC8C}
 		{41FBB5F0-DD63-4EC1-A39A-2FD3D191AE31} = {22C7805F-4DA7-4E9D-B253-92FAF16742D8}
 		{33759DE1-EFA8-4F49-8A22-19147AAC5F0B} = {22C7805F-4DA7-4E9D-B253-92FAF16742D8}
+		{C40BDC6B-43E2-4EAB-9187-57F7D39B1181} = {360A6341-663C-4ADF-85C0-6D87A100AAF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8645A3A6-3276-4CFE-AF60-FC3CAE461A8C}
