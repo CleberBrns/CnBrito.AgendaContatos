@@ -7,6 +7,7 @@ namespace CnBrito.AgendaContatos.Data.Entity.Modelagem.Usuario
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string Login { get; set; }
         public string Senha { get; set; }
         public virtual List<Contato> Contatos { get; set; }
     }

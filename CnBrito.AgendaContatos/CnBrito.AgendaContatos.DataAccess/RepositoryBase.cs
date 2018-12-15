@@ -25,7 +25,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public TModel Salvar(TModel model)
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 var modelBD = Mapper.Map<TModel, TRespository>(model);
                 context.Set<TRespository>().Add(modelBD);
@@ -37,7 +37,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public bool Atualizar(TModel model)
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 var modeloBD = Mapper.Map<TModel, TRespository>(model);
                 Attach(context, modeloBD, EntityState.Modified);
@@ -48,7 +48,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public IList<TModel> SalvarLista(IList<TModel> listModel)
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 var listaModelBD = Mapper.Map<IList<TModel>, IList<TRespository>>(listModel);
                 context.Set<TRespository>().AddRange(listaModelBD);
@@ -60,7 +60,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public bool AtualizarLista(IList<TModel> listModel)
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 foreach (var model in listModel)
                 {
@@ -74,7 +74,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public bool Excluir(Expression<Func<TModel, bool>> expression)
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 var modelo = context.Set<TRespository>().FirstOrDefault(GetMappedSelector(expression));
                 if (modelo == null)
@@ -86,7 +86,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public bool Excluir(TModel model)
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 var modelo = Mapper.Map<TModel, TRespository>(model);
                 Attach(context, modelo, EntityState.Deleted);
@@ -96,7 +96,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         public IList<TModel> Lista()
         {
-            using (var context = new Context())
+            using (var context = new AgdCtContext())
             {
                 var modelo = context.Set<TRespository>().ToList();
                 return Mapper.Map<IList<TRespository>, IList<TModel>>(modelo);
@@ -105,7 +105,7 @@ namespace CnBrito.AgendaContatos.DataAccess
 
         #region Métodos Privados
 
-        private void Attach(Context context, TRespository entity, EntityState state)
+        private void Attach(AgdCtContext context, TRespository entity, EntityState state)
         {
             var entry = context.Entry(entity);
             if (entry.State == EntityState.Detached)

@@ -11,9 +11,9 @@ using System.Reflection;
 
 namespace CnBrito.AgendaContatos.Data.Entity
 {
-    public class Context : DbContext
+    public class AgdCtContext : DbContext
     {
-        public Context() : base("CnBrito.AgendaContatos")
+        public AgdCtContext() : base("CnBrito.AgendaContatos")
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;

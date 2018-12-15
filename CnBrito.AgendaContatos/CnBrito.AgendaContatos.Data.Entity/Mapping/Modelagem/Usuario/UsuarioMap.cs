@@ -14,8 +14,12 @@ namespace CnBrito.AgendaContatos.Data.Entity.Mapping.Modelagem.Usuario
                 .HasMaxLength(100)
                 .IsRequired();
 
-            Property(x => x.Nome)
-               .HasMaxLength(20)
+            Property(x => x.Login)
+                .HasMaxLength(20)
+                .IsRequired();
+
+            Property(x => x.Senha)
+               .HasMaxLength(10)
                .IsRequired();
         }
     }

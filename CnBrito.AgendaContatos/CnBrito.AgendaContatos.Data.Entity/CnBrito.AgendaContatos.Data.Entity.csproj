@@ -48,7 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context.cs" />
+    <Compile Include="AgdCtContext.cs" />
     <Compile Include="Mapping\IMapping.cs" />
     <Compile Include="Mapping\Modelagem\Agenda\ContatoMap.cs" />
     <Compile Include="Mapping\Modelagem\Agenda\EmailMap.cs" />

@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agenda\ContatoDataAccess.cs" />
+    <Compile Include="Agenda\EmailDataAccess.cs" />
+    <Compile Include="Agenda\TelefoneDataAccess.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuarios\UsuarioDataAccess.cs" />
@@ -76,8 +79,6 @@
       <Name>CnBrito.AgendaContatos.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Agenda\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

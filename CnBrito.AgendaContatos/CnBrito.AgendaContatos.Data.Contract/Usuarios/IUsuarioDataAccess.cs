@@ -5,5 +5,6 @@ namespace CnBrito.AgendaContatos.Data.Contract.Usuarios
     public interface IUsuarioDataAccess : IRepositoryBase<UsuarioModel>
     {
         UsuarioModel GetUsuario(int id);
+        UsuarioModel GetByLogin(string login);
     }
 }

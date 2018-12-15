@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using CnBrito.AgendaContatos.Data.Contract.Usuarios;
+using CnBrito.AgendaContatos.Data.Entity;
 using CnBrito.AgendaContatos.Data.Entity.Modelagem.Usuario;
 using CnBrito.AgendaContatos.Model.Usuario;
+using System.Data.Entity;
+using System.Linq;
 
 namespace CnBrito.AgendaContatos.DataAccess.Usuarios
 {
@@ -11,7 +14,23 @@ namespace CnBrito.AgendaContatos.DataAccess.Usuarios
 
         public UsuarioModel GetUsuario(int id)
         {
-            throw new System.NotImplementedException();
+            using (var context = new AgdCtContext())
+            {
+                return Mapper.Map<UsuarioModel>(
+                        context.Usuario.Where(f => f.Id == id)                                    
+                                       .Include(c => c.Contatos)
+                                       .FirstOrDefault());
+            }
+        }
+
+        public UsuarioModel GetByLogin(string login)
+        {
+            using (var context = new AgdCtContext())
+            {
+                return Mapper.Map<UsuarioModel>(
+                        context.Usuario.Where(f => f.Login == login)                                       
+                                       .FirstOrDefault());
+            }
         }
     }
 }

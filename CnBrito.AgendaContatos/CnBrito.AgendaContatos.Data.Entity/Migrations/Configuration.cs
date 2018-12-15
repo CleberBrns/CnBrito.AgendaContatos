@@ -5,14 +5,14 @@ namespace CnBrito.AgendaContatos.Data.Entity.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CnBrito.AgendaContatos.Data.Entity.Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<CnBrito.AgendaContatos.Data.Entity.AgdCtContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(CnBrito.AgendaContatos.Data.Entity.Context context)
+        protected override void Seed(CnBrito.AgendaContatos.Data.Entity.AgdCtContext context)
         {
             //  This method will be called after migrating to the latest version.
 
