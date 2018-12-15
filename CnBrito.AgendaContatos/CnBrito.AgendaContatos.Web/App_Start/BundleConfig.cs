@@ -10,6 +10,15 @@ namespace CnBrito.AgendaContatos.Web
         {
             #region Scripts
 
+            bundles.Add(new ScriptBundle("~/bundles/datatables/js").Include(
+                    "~/Scripts/DataTables/jquery.dataTables.min.js",
+                    "~/Scripts/DataTables/dataTables.buttons.min.js",
+                    "~/Scripts/DataTables/buttons.html5.min.js",
+                    "~/Scripts/DataTables/dataTables.bootstrap.min.js",
+                    "~/Scripts/DataTables/dataTables.setting.js",
+                    "~/Scripts/DataTables/jquery.tabletojson.min.js",
+                    "~/Scripts/DataTables/jquery.tabletojson.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
                     "~/scripts/bootbox.js"));
 

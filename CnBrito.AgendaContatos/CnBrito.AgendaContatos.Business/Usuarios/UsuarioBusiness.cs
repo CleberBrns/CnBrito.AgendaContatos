@@ -23,7 +23,7 @@ namespace CnBrito.AgendaContatos.Business.Usuarios
             result.Status = false;
             var usuarioValido = false;
 
-            if (string.IsNullOrEmpty(model.Login.Trim()) || string.IsNullOrEmpty(model.Senha.Trim()))
+            if (string.IsNullOrEmpty(model.Login) || string.IsNullOrEmpty(model.Senha))
                 result.Message = "O campo Login e Senha são obrigatórios!";
             else
             {

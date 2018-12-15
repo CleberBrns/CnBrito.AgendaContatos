@@ -176,7 +176,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Constants\ConstSessions.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +189,7 @@
     <Compile Include="Session\Contract\ISessionUsuario.cs" />
     <Compile Include="Session\SessionBase.cs" />
     <Compile Include="Session\UsuarioSession.cs" />
+    <Compile Include="Util\Mensagens.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -507,10 +511,10 @@
     <Content Include="Content\SweetAlert2\sweetalert2.scss" />
     <Content Include="Content\SweetAlert2\mixins.scss" />
     <Content Include="Content\SweetAlert2\animations.scss" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -526,6 +530,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CnBrito.AgendaContatos.Business.Contract\CnBrito.AgendaContatos.Business.Contract.csproj">
+      <Project>{41FBB5F0-DD63-4EC1-A39A-2FD3D191AE31}</Project>
+      <Name>CnBrito.AgendaContatos.Business.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CnBrito.AgendaContatos.Config\CnBrito.AgendaContatos.Config.csproj">
       <Project>{C40BDC6B-43E2-4EAB-9187-57F7D39B1181}</Project>
       <Name>CnBrito.AgendaContatos.Config</Name>
