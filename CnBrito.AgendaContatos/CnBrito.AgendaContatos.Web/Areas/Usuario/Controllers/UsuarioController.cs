@@ -14,7 +14,6 @@ namespace CnBrito.AgendaContatos.Web.Areas.Usuario.Controllers
 
         IUsuarioBusiness _usuarioBusiness;
         readonly UsuarioSession session = new UsuarioSession();
-        readonly string sessionName = Constants.ConstSessions.usuario;
         readonly Mensagens mensagens = new Mensagens();
 
         public UsuarioController(IUsuarioBusiness usuarioBusiness)
@@ -27,6 +26,10 @@ namespace CnBrito.AgendaContatos.Web.Areas.Usuario.Controllers
         // GET: Usuario/Usuario
         public ActionResult Index()
         {
+            var userInfo = GetUsuarioSession();
+            if (!userInfo.Item2)
+                return RedirectToAction("Login", "Login", new { area = "" });
+
             return View();
         }
 
