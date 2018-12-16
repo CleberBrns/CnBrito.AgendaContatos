@@ -1,8 +1,12 @@
 ﻿@model CnBrito.AgendaContatos.Model.Usuario.UsuarioModel
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
     <div class="form-horizontal">
 
@@ -40,7 +44,7 @@
                 <button type="button" class="btn btn-primary" id="btnRetornar" name="btnRetornar"
                         onclick="NovoUsuario.CloseModal()">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Retornar
-                </button> 
+                </button>
                 <button type="button" class="btn btn-primary" id="btnSalvar">
                     Salvar <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                 </button>
@@ -48,6 +52,12 @@
         </div>
     </div>
 }
+
+<style>
+    .dialogWide > .modal-dialog {
+        width: 35% !important;
+    }
+</style>
 
 <script>
 
@@ -58,6 +68,9 @@
     var NovoUsuario = {
 
         Cadastrar: function () {
+
+            debugger
+            var teste = $('form').serialize();
 
             //Ajuste para impedir multiplos cliques
             event.preventDefault();
@@ -71,36 +84,48 @@
                 success: function (result) {
 
                     var retorno = result.mensagensRetorno;
+                    if (retorno == null || retorno == undefined) {
 
-                    if (retorno.Status) {
-                        swal({
-                            title: '',
-                            text: retorno.MensagemExibicao,
-                            type: 'success',
-                            confirmButtonColor: '#10386B',
-                            allowOutsideClick: false
-                        }).then(function () {
-                            bootbox.hideAll();
-                            funcoesIndexTabs.listaUsuarios($(".abaUsuarios"), false);
+                        bootbox.hideAll();
+
+                        bootbox.dialog({
+                            className: "dialogWide",
+                            title: "Cadastrar Usuário",
+                            message: result
                         });
                     }
                     else {
 
-                        swal({
-                            title: '',
-                            text: retorno.MensagemExibicao,
-                            type: 'warning',
-                            confirmButtonColor: '#10386B',
-                            allowOutsideClick: false
-                        });
-                        console.log(retorno.MensagemAnalise);
+                        if (retorno.Status) {
+                            swal({
+                                title: '',
+                                text: retorno.MensagemExibicao,
+                                type: 'success',
+                                confirmButtonColor: '#10386B',
+                                allowOutsideClick: false
+                            }).then(function () {
+                                bootbox.hideAll();
+                                funcoesIndexTabs.listaUsuarios($(".abaUsuarios"), false);
+                            });
+                        }
+                        else {
+
+                            swal({
+                                title: '',
+                                text: retorno.MensagemExibicao,
+                                type: 'warning',
+                                confirmButtonColor: '#10386B',
+                                allowOutsideClick: false
+                            });
+                            console.log(retorno.MensagemAnalise);
+                        }
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     validacao.errorAjax(jqXHR, textStatus, errorThrown);
                 }
             }).always(function () {
-                that.on('click', UsuarioGerenciar.salvar); //Devolve a ação do botão
+                that.on('click', NovoUsuario.Cadastrar); //Devolve a ação do botão
             });
 
         },

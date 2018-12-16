@@ -32,7 +32,7 @@ namespace CnBrito.AgendaContatos.Web.Areas.Usuario.Controllers
 
         public ActionResult NovoUsuario()
         {
-            return PartialView("_NovoUsuario");
+            return PartialView("_NovoUsuario", new UsuarioModel());
         }
 
         [HttpPost]        
@@ -57,15 +57,14 @@ namespace CnBrito.AgendaContatos.Web.Areas.Usuario.Controllers
                     msgAnalise = ex.ToString();
                 }
 
+                var mensagensRetorno = mensagens.ConfiguraMensagemRetorno(msgExibicao, msgAnalise);
+                return Json(new { mensagensRetorno }, JsonRequestBehavior.AllowGet);
+
             }
             else
             {
-
-            }
-
-
-            var mensagensRetorno = mensagens.ConfiguraMensagemRetorno(msgExibicao, msgAnalise);
-            return Json(new { mensagensRetorno }, JsonRequestBehavior.AllowGet);
+                return PartialView("_NovoUsuario", model);
+            }           
         }
     }
 }

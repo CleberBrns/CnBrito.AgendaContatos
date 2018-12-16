@@ -34,11 +34,6 @@ namespace CnBrito.AgendaContatos.Web.Controllers
         [HttpGet]
         public ActionResult Autenticar(UsuarioModel model)
         {
-
-            if (ModelState.IsValid)
-            {
-
-            }
             var mensagens = new Mensagens();            
 
             string msgExibicao = string.Empty;

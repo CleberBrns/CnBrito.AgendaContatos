@@ -1,6 +1,4 @@
-﻿@model  CnBrito.AgendaContatos.Model.Usuario.UsuarioModel
-
-@{
+﻿@{
     ViewBag.Title = "Login";
 }
 
@@ -13,10 +11,10 @@
                 <div>
                     <form>
                         <div class="form-group">
-                            <input type="text" autocomplete="off" name="Login" placeholder="Login" class="caixaTexto nome">
+                            <input type="text" id="login" autocomplete="off" placeholder="Login" class="caixaTexto nome">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="Senha" id="senha" placeholder="Senha" class="caixaTexto senha">
+                            <input type="password" id="senha" placeholder="Senha" class="caixaTexto senha">
                         </div>
                         <div class="divBotoes">
                             <div class="form-group">                                
@@ -58,6 +56,7 @@
                 type: "GET",
                 success: function (html) {
                     bootbox.dialog({
+                        className: "dialogWide",
                         title: "Cadastrar Usuário",
                         message: html
                     });
@@ -70,10 +69,15 @@
 
         AutenticarUsuario: function () {
 
+            var usuario = {
+                Login: $("#login").val(),
+                Senha: $("#senha").val()
+            };
+
             $.ajax({
                 url: "@Url.Action("Autenticar", "Login")",
                 type: "GET",
-                data: $('form').serialize(),
+                data: { model: usuario },
                 success: function (result) {
 
                     var retorno = result.mensagensRetorno;
