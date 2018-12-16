@@ -10,6 +10,8 @@ namespace CnBrito.AgendaContatos.Web.Controllers
 {
     public class LoginController : BaseController
     {
+        #region Propriedades e Construtor
+
         IUsuarioBusiness _usuarioBusiness;
         readonly UsuarioSession session = new UsuarioSession();
         readonly string sessionName = Constants.ConstSessions.usuario;
@@ -18,6 +20,8 @@ namespace CnBrito.AgendaContatos.Web.Controllers
         {
             this._usuarioBusiness = usuarioBusiness;
         }
+
+        #endregion
 
         public ActionResult Login()
         {

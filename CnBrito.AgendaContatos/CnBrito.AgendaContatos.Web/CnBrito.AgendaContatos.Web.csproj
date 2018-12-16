@@ -176,6 +176,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Usuario\Controllers\UsuarioController.cs" />
+    <Compile Include="Areas\Usuario\UsuarioAreaRegistration.cs" />
     <Compile Include="Constants\ConstSessions.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -388,6 +390,10 @@
     <Content Include="Content\SweetAlert2\sweet-alert-animations.less" />
     <Content Include="Content\SweetAlert2\sweet-alert-combine.less" />
     <Content Include="Content\SweetAlert2\sweet-alert.less" />
+    <Content Include="Areas\Usuario\Views\Web.config" />
+    <Content Include="Areas\Usuario\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Usuario\Views\Usuario\Index.cshtml" />
+    <Content Include="Areas\Usuario\Views\Usuario\_NovoUsuario.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
