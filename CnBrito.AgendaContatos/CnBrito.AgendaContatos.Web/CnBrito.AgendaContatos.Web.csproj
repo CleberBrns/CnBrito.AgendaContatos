@@ -178,6 +178,8 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Contatos\ContatoAreaRegistration.cs" />
     <Compile Include="Areas\Contatos\Controllers\ContatoController.cs" />
+    <Compile Include="Areas\Contatos\Controllers\EmailController.cs" />
+    <Compile Include="Areas\Contatos\Controllers\TelefoneController.cs" />
     <Compile Include="Areas\Usuario\Controllers\UsuarioController.cs" />
     <Compile Include="Areas\Usuario\UsuarioAreaRegistration.cs" />
     <Compile Include="Constants\ConstSessions.cs" />
@@ -396,7 +398,6 @@
     <Content Include="Areas\Usuario\Views\Usuario\Index.cshtml" />
     <Content Include="Areas\Usuario\Views\Usuario\_NovoUsuario.cshtml" />
     <Content Include="Areas\Contatos\Views\Web.config" />
-    <Content Include="Areas\Contatos\Views\Contato\_GridContatos.cshtml" />
     <Content Include="Areas\Contatos\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Contatos\Views\Contato\_Listagem.cshtml" />
     <Content Include="Areas\Contatos\Views\Contato\_Gerenciar.cshtml" />

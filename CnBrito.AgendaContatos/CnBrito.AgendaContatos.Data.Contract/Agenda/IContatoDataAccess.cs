@@ -9,5 +9,6 @@ namespace CnBrito.AgendaContatos.Data.Contract.Agenda
         ContatoModel GetContatoUsuario(int idUsuario);
         ContatoModel GetContatoUsuario(int idUsuario, string nome);
         List<ContatoModel> ListaContatosUsuario(int idUsuario);
+        bool Excluir(int id);
     }
 }

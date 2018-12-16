@@ -59,5 +59,19 @@ namespace CnBrito.AgendaContatos.DataAccess.Agenda
                                        .ToList());
             }
         }
+
+        public bool Excluir(int id)
+        {
+            bool excluido = false;
+
+            using (var context = new AgdCtContext())
+            {
+                var registro = context.Contato.Where(x => x.Id == id).FirstOrDefault();
+                context.Contato.Remove(registro);
+                excluido = context.SaveChanges() != 0;
+            }
+
+            return excluido;
+        }
     }
 }

@@ -32,24 +32,41 @@
                 <tbody>
                     @foreach (var itemModel in Model)
                     {
-                        <tr>
-                            <td>@itemModel.Nome</td>
+                    <tr>
+                        <td>@itemModel.Nome</td>
+
+                        @if (itemModel.Telefones != null && itemModel.Telefones.Count > 0)
+                        {
                             <td>@itemModel.Telefones.FirstOrDefault().Numero</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                        @if (itemModel.Emails != null && itemModel.Emails.Count > 0)
+                        {
                             <td>@itemModel.Emails.FirstOrDefault().Endereco</td>
-                            <td class="text-center">
-                                <a class="btnEditar" id-registro="@itemModel.Id" title="Editar" 
-                                   onclick="ContatoListagem.ModalEditar(this)"
-                                   style="cursor: pointer;">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </a>
-                            </td>
-                            <td class="text-center">
-                                <a class="btnExcluir" id-registro="@itemModel.Id" nome-regrito="@itemModel.Nome"
-                                   title="Excluir" onclick="ContatoListagem.Excluir(this)" style="cursor: pointer;">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </a>
-                            </td>
-                        </tr>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+
+                        <td class="text-center">
+                            <a class="btnEditar" id-registro="@itemModel.Id" title="Editar"
+                               onclick="ContatoListagem.ModalEditar(this)"
+                               style="cursor: pointer;">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btnExcluir" id-registro="@itemModel.Id" nome-regrito="@itemModel.Nome"
+                               title="Excluir" onclick="ContatoListagem.Excluir(this)" style="cursor: pointer;">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -112,12 +129,10 @@
             });
         },
 
-        Excluir: function (elem) {
-
-            var nome = $(elem).attr("nome-registro");
+        Excluir: function (elem) {            
 
             swal({
-                title: 'Você confirma a exclusão do Contato ' + nome + '?',
+                title: 'Você confirma a exclusão do Contato?',
                 text: '',
                 type: 'question',
                 showCancelButton: true,
@@ -149,7 +164,7 @@
                                     allowOutsideClick: false
                                 }).then(function () {
                                     bootbox.hideAll();
-                                    funcoesIndexTabs.listaUsuarios($(".abaContatos"), false);
+                                    FuncoesIndexTabs.CarregaContatos($(".abaContatos"), false);
                                 });
                             }
                             else {

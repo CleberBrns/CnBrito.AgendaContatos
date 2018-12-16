@@ -1,77 +1,91 @@
 ﻿@model CnBrito.AgendaContatos.Model.Agenda.ContatoModel
 
 @{
-    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;
-    var idUsuario = user != null ? user.Id : 0;
+    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;  
 }
 
 @using (Html.BeginForm())
 {
+
+<script src="~/Scripts/Mask/jquery.mask.js"></script>
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.HiddenFor(model => model.IdUsuario);
+        <input type="hidden" id="idUsuario" name="IdUsuario" value="@Model.IdUsuario" />
+        <input type="hidden" id="idContato" name="Id" value="@Model.Id" />
         <div class="campos" style="padding: 2% 0 2% 5%">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Nome", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-6">
                     <div>
-                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                        <input type="text" autocomplete="off" class="form-control" id="nome" value="@Model.Nome" />
+                        <span class="field-validation-valid text-danger" id="validaNome" data-valmsg-replace="true"></span>
                     </div>
                 </div>
             </div>
             <div class="text-left" style="padding-left: 17%">
-                <button type="button" class="btn btn-primary" id="btnSalvarContato"
-                        onclick="Contato.Salvar()">
+                <button type="button" class="btn btn-primary" onclick="Contato.SalvaNome()">
                     Salvar Nome Contato
                     <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                 </button>
             </div>
 
-            <div id="dadosContato" style="padding-top: 2%; padding-left: 30%">
-                <div class="form-group">
-                    <div>
-                        @Html.Label("Dados Contato", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div id="dadosContato" style="display: none">
+
+                <div style="padding-top: 2%; padding-left: 30%">
+                    <div class="form-group">
+                        <div>
+                            @Html.Label("Dados Contato", htmlAttributes: new { @class = "control-label col-md-3" })
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-6">
-                    <input type="text" autocomplete="off" class="form-control" id="telefone" />
-                    <span class="field-validation-valid text-danger" id="validaTelefone" data-valmsg-replace="true"></span>
+                <div class="form-group">
+                    @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <input type="text" autocomplete="off" class="form-control" id="telefone" />
+                        <span class="field-validation-valid text-danger" id="validaTelefone" data-valmsg-replace="true"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="text-left" style="padding-left: 17%">
-                <button type="button" class="btn btn-primary" id="btnSalvarTelefone"
-                        onclick="Contato.SalvarTelefone()">
-                    Adicionar Telefone
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="form-group">
-                <div>@Html.Partial("_GridTelefones")</div>
-            </div>
-            <div class="form-group" style="padding-top: 5%">
-                @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-8">
-                    <input type="text" autocomplete="off" class="form-control" id="email" />
-                    <span class="field-validation-valid text-danger" id="validaEmail" data-valmsg-replace="true"></span>
+                <div class="text-left" style="padding-left: 17%">
+                    <button type="button" class="btn btn-primary" onclick="Contato.SalvaTelefone()">
+                        Adicionar Telefone
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
                 </div>
-            </div>
-            <div class="text-left" style="padding-left: 17%">
-                <button type="button" class="btn btn-primary" id="btnSalvarEmail"
-                        onclick="Contato.SalvarEmail()" title="Incluir E-mail">
-                    Adicionar E-mail
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="form-group">
-                <div>@Html.Partial("_GridEmails")</div>
+                @if (Model.Id != 0)
+                {
+                    <div class="form-group">
+
+                        <div id="divGridTelefones">@Html.Partial("_GridTelefones", Model.Telefones)</div>
+                        <div id="divGridTelefonesLoad" />
+
+                    </div>
+                }
+                <div class="form-group" style="padding-top: 5%">
+                    @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-8">
+                        <input type="text" autocomplete="off" class="form-control" id="email" />
+                        <span class="field-validation-valid text-danger" id="validaEmail" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="text-left" style="padding-left: 17%">
+                    <button type="button" class="btn btn-primary" id="btnSalvarEmail"
+                            onclick="Contato.SalvarEmail()" title="Incluir E-mail">
+                        Adicionar E-mail
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+                @if (Model.Id != 0)
+                {
+                    <div class="form-group">
+                        <div id="divGridEmails">@Html.Partial("_GridEmails", Model.Emails)</div>
+                        <div id="divGridEmailsLoad" />
+                    </div>
+                }
             </div>
         </div>
 
@@ -94,17 +108,421 @@
 
 <script>
 
-    @*if (@idUsuario == 0) {
+    var SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
+    $("#telefone").mask(SPMaskBehavior, spOptions);
+   
+    if ($("#idContato").val() == 0) {
         $("#dadosContato").hide();
     }
     else {
         $("#dadosContato").show();
-    }*@
+    }
 
     var Contato = {
 
-        Salvar: function () {
+        ValidaNome: function () {
 
+            var ehValido = true;
+
+            var nome = $("#nome").val().trim();
+            var validaNome = $("#validaNome");
+
+            if (validacao.campoNulo(nome, validaNome))
+                ehValido = false;
+
+            if (validacao.minLenght(nome, validaNome, 4, "A quantidade mínima de caracteres para o nome é 4"))
+                ehValido = false;
+
+            return ehValido;
+
+        },
+
+        SalvaNome: function () {
+
+            if (Contato.ValidaNome()) {
+
+                var contato = {
+                    Id: $("#idContato").val(),
+                    IdUsuario: $("#idUsuario").val(),
+                    Nome: $("#nome").val()
+                };
+
+                $.ajax({
+                    url: "@Url.Action("Salvar", "Contato")",
+                    type: "POST",
+                    data: { model: contato },
+                    success: function (result) {
+
+                        debugger;
+                        var retorno = result.mensagensRetorno;
+
+                        if (retorno == null || retorno == undefined) {
+
+                            bootbox.hideAll();
+
+                            bootbox.dialog({
+                                className: "dialogWide",
+                                title: "Gerenciar Contato",
+                                message: result
+                            });
+                        }
+                        else {
+
+                            if (retorno.Status) {
+                                swal({
+                                    title: '',
+                                    text: retorno.MensagemExibicao,
+                                    type: 'success',
+                                    confirmButtonColor: '#10386B',
+                                    allowOutsideClick: false
+                                }).then(function () {
+                                    $("#dadosContato").show();
+                                });
+                            }
+                            else {
+
+                                swal({
+                                    title: '',
+                                    text: retorno.MensagemExibicao,
+                                    type: 'warning',
+                                    confirmButtonColor: '#10386B',
+                                    allowOutsideClick: false
+                                });
+                                console.log(retorno.MensagemAnalise);
+                            }    
+
+                        }                                           
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                    }
+                });
+
+            }
+        },
+
+        CarregaTelefones: function () {
+
+            var idContato = $("#idContato").val();
+            
+            $.ajax({
+                url: "@Url.Action("ListarTelefonesContato", "Telefone")",
+                data: { idContato: idContato },
+                type: "GET",
+                success: function (result) {
+                    if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
+                        $('#divGridTelefones').remove();
+                        $('#divGridTelefonesLoad').html(result);
+                    }
+                    else {
+                        var retorno = result.mensagensRetorno;
+                        swal({
+                            title: '',
+                            text: retorno.MensagemExibicao,
+                            type: 'warning',
+                            confirmButtonColor: '#10386B',
+                            allowOutsideClick: false
+                        });
+                        console.log(retorno.MensagemAnalise);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                }
+            });
+
+        },
+
+        ValidaTelefone: function () {
+
+            var ehValido = true;
+
+            var telefone = $("#telefone").val().trim();
+            var validaTelefone = $("#validaTelefone");
+
+            if (validacao.campoNulo(telefone, validaTelefone))
+                ehValido = false;
+
+            if (validacao.minLenght(telefone, validaTelefone, 14, "Telefone inválido!"))
+                ehValido = false;
+
+            return ehValido;
+
+        },
+
+        SalvaTelefone: function () {
+
+            if (Contato.ValidaTelefone()) {
+                
+                var telefone = {
+                    IdContato: $("#idContato").val(),
+                    Numero: $("#telefone").val()
+                };
+
+                $.ajax({
+                    url: "@Url.Action("Salvar", "Telefone")",
+                    type: "POST",
+                    data: { model: telefone },
+                    success: function (result) {
+
+                        var retorno = result.mensagensRetorno;
+
+                        if (retorno.Status) {
+                            swal({
+                                title: '',
+                                text: retorno.MensagemExibicao,
+                                type: 'success',
+                                confirmButtonColor: '#10386B',
+                                allowOutsideClick: false
+                            }).then(function () {
+                                Contato.CarregaTelefones();
+                            });
+                        }
+                        else {
+
+                            swal({
+                                title: '',
+                                text: retorno.MensagemExibicao,
+                                type: 'warning',
+                                confirmButtonColor: '#10386B',
+                                allowOutsideClick: false
+                            });
+                            console.log(retorno.MensagemAnalise);
+                        }
+                                                              
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                    }
+                });
+            }
+        },
+
+        ExcluiTelefone: function (elem) {
+
+             swal({
+                    title: 'Você confirma a exclusão do telefone?',
+                    text: '',
+                    type: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#10386B',
+                    confirmButtonText: 'Ok',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    allowOutsideClick: false
+                }).then((willDelete) => {
+
+                    if (willDelete.value) {
+
+                        var id = $(elem).attr("id-registro");
+
+                        $.ajax({
+                            url: "@Url.Action("Excluir", "Telefone")/",
+                            type: "POST",
+                            data: { id: id },
+                            success: function (result) {
+
+                                var retorno = result.mensagensRetorno;
+
+                                if (retorno.Status) {
+                                    swal({
+                                        title: '',
+                                        text: retorno.MensagemExibicao,
+                                        type: 'success',
+                                        confirmButtonColor: '#10386B',
+                                        allowOutsideClick: false
+                                    }).then(function () {
+                                        Contato.CarregaTelefones();
+                                    });
+                                }
+                                else {
+
+                                    swal({
+                                        title: '',
+                                        text: retorno.MensagemExibicao,
+                                        type: 'warning',
+                                        confirmButtonColor: '#10386B',
+                                        allowOutsideClick: false
+                                    });
+                                    console.log(retorno.MensagemAnalise);
+                                }
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                            }
+                        });
+
+                    }
+
+                });
+        },
+
+        CarregaEmails: function () {
+
+            var idContato = $("#idContato").val();
+
+            $.ajax({
+                url: "@Url.Action("ListarEmailsContato", "Email")",
+                data: { idContato: idContato },
+                type: "GET",
+                success: function (result) {
+                    if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
+                        $('#divGridEmails').remove();
+                        $('#divGridEmailsLoad').html(result);
+                    }
+                    else {
+                        var retorno = result.mensagensRetorno;
+                        swal({
+                            title: '',
+                            text: retorno.MensagemExibicao,
+                            type: 'warning',
+                            confirmButtonColor: '#10386B',
+                            allowOutsideClick: false
+                        });
+                        console.log(retorno.MensagemAnalise);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                }
+            });
+
+        },
+
+        ValidaEmail: function () {
+
+            var ehValido = true;
+
+            var email = $("#email").val().trim();
+            var validaEmail = $("#validaEmail");
+
+            if (validacao.campoNulo(email, validaEmail))
+                ehValido = false;
+
+            if (!validacao.ValidarEmail(email, validaEmail))
+                ehValido = false;
+
+            return ehValido;
+
+        },
+
+        SalvaEmail: function () {
+
+            if (Contato.ValidaEmail()) {
+
+                var email = {
+                    IdContato: $("#idContato").val(),
+                    Endereco: $("#email").val()
+                };
+
+                $.ajax({
+                    url: "@Url.Action("Salvar", "Email")",
+                    type: "POST",
+                    data: { model: email },
+                    success: function (result) {
+
+                        var retorno = result.mensagensRetorno;
+
+                        if (retorno.Status) {
+                            swal({
+                                title: '',
+                                text: retorno.MensagemExibicao,
+                                type: 'success',
+                                confirmButtonColor: '#10386B',
+                                allowOutsideClick: false
+                            }).then(function () {
+                                Contato.CarregaTelefones();
+                            });
+                        }
+                        else {
+
+                            swal({
+                                title: '',
+                                text: retorno.MensagemExibicao,
+                                type: 'warning',
+                                confirmButtonColor: '#10386B',
+                                allowOutsideClick: false
+                            });
+                            console.log(retorno.MensagemAnalise);
+                        }
+                                                              
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                    }
+                });
+
+            }
+        },
+
+        ExcluiEmail: function (elem) {
+
+            swal({
+                title: 'Você confirma a exclusão do E-mail?',
+                text: '',
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#10386B',
+                confirmButtonText: 'Ok',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                allowOutsideClick: false
+            }).then((willDelete) => {
+
+                if (willDelete.value) {
+
+                    var id = $(elem).attr("id-registro");
+
+                    $.ajax({
+                        url: "@Url.Action("Excluir", "Email")/",
+                        type: "POST",
+                        data: { id: id },
+                        success: function (result) {
+
+                            var retorno = result.mensagensRetorno;
+
+                            if (retorno.Status) {
+                                swal({
+                                    title: '',
+                                    text: retorno.MensagemExibicao,
+                                    type: 'success',
+                                    confirmButtonColor: '#10386B',
+                                    allowOutsideClick: false
+                                }).then(function () {
+                                    Contato.CarregaEmails();
+                                });
+                            }
+                            else {
+
+                                swal({
+                                    title: '',
+                                    text: retorno.MensagemExibicao,
+                                    type: 'warning',
+                                    confirmButtonColor: '#10386B',
+                                    allowOutsideClick: false
+                                });
+                                console.log(retorno.MensagemAnalise);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                        }
+                    });
+                }
+            });
+
+        },
+
+        CloseModal: function () {
+            bootbox.hideAll();
+            FuncoesIndexTabs.CarregaContatos($(".abaContatos"), false);
         }
 
     }

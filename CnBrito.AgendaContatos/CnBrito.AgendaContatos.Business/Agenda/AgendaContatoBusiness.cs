@@ -59,15 +59,16 @@ namespace CnBrito.AgendaContatos.Business.Agenda
 
             return result;
         }
-        public ResultModel<bool> SalvarContato(ContatoModel model)
+        public ResultModel<ContatoModel> SalvarContato(ContatoModel model)
         {
-            var result = new ResultModel<bool>();
+            var result = new ResultModel<ContatoModel>();
 
             var nomeJahUtilizado = VerificaExistenciaNomeContato(model);
 
             if (nomeJahUtilizado.Item2)
             {
-                result = nomeJahUtilizado.Item1;
+                result.Message = nomeJahUtilizado.Item1.Message;
+                result.Status = false;
             }
             else
             {
@@ -77,7 +78,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
                     if (model.Id != 0)
                     {
                         result.Message = Constants.msgSucessoSalvar;
-                        result.Value = true;
+                        result.Value = model;
                         result.Status = true;
                     }
                     else
@@ -85,12 +86,14 @@ namespace CnBrito.AgendaContatos.Business.Agenda
                 }
                 else
                 {
-                    result.Value = _contatoDataAccess.Atualizar(model);
+                    var atualizou = _contatoDataAccess.Atualizar(model);
 
-                    if (result.Value)
+                    if (atualizou)
                     {
+                        var registro = _contatoDataAccess.Get(model.Id);
+
                         result.Message = Constants.msgSucessoAtualizar;
-                        result.Value = true;
+                        result.Value = registro;
                         result.Status = true;
                     }
                     else
@@ -109,7 +112,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
             var registro = _contatoDataAccess.Get(idContato);
 
             if (registro != null)
-                result.Value = _contatoDataAccess.Excluir(registro);
+                result.Value = _contatoDataAccess.Excluir(idContato);
 
             if (result.Value)
             {

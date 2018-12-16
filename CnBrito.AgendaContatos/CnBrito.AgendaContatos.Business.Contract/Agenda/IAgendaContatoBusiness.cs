@@ -10,7 +10,7 @@ namespace CnBrito.AgendaContatos.Business.Contract.Agenda
         ResultModel<ContatoModel> GetContato(int idContato);
         ResultModel<ContatoModel> GetContatoUsuario(int idUsuario);
         ResultModel<List<ContatoModel>> ListContatosUsuario(int idUsuario);
-        ResultModel<bool> SalvarContato(ContatoModel contato);
+        ResultModel<ContatoModel> SalvarContato(ContatoModel contato);
         ResultModel<bool> ExcluirContato(int idContato);
         #endregion
 

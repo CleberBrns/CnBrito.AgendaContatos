@@ -1,8 +1,6 @@
-﻿@*@model IList<CnBrito.AgendaContatos.Model.Agenda.TelefoneModel>*@
+﻿@model List<CnBrito.AgendaContatos.Model.Agenda.EmailModel>
 
-@{
-    /**/
-
+@{  
     var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;
 }
 
@@ -19,14 +17,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @*@foreach (var itemModel in Model)*@
-                    @for (int i = 0; i < 10; i++)
+                    @foreach (var itemModel in Model)                    
                     {
                         <tr>
-                            <td>cleber.nsbrito@gmail.com</td>
+                            <td>@itemModel.Endereco</td>
                             <td class="text-center">
-                                <a class="btnExcluir" id-registro="@i"
-                                   title="Excluir" onclick="Contato.ExcluirEmail(this)" style="cursor: pointer;">
+                                <a class="btnExcluir" id-registro="@itemModel.Id"
+                                   title="Excluir" onclick="Contato.ExcluiEmail(this)" style="cursor: pointer;">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
                             </td>

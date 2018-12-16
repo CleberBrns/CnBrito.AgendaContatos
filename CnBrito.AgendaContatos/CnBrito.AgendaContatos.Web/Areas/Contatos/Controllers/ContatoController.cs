@@ -3,6 +3,7 @@ using CnBrito.AgendaContatos.Model.Agenda;
 using CnBrito.AgendaContatos.Web.Controllers;
 using CnBrito.AgendaContatos.Web.Util;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
@@ -72,7 +73,10 @@ namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
             ViewBag.Usuario = userInfo.Item1;
             var novoContato = new ContatoModel
             {
-                IdUsuario = userInfo.Item1.Id
+                Id = 0,
+                IdUsuario = userInfo.Item1.Id,
+                Telefones = new List<TelefoneModel>(),
+                Emails = new List<EmailModel>()
             };
 
             return PartialView("_Gerenciar", novoContato);
@@ -129,6 +133,11 @@ namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
 
                 msgExibicao = resultService.Message;
                 msgAnalise = !resultService.Status ? "Falha!" : string.Empty;
+
+                if (resultService.Status)
+                {
+                    return PartialView("_Gerenciar", resultService.Value);
+                }
             }
             catch (Exception ex)
             {
