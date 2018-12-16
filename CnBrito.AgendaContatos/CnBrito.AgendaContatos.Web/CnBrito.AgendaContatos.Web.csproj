@@ -358,7 +358,6 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Default\styleImportant.css" />
-    <Content Include="Content\Default\tabsAgenda.css" />
     <Content Include="Content\Default\tabsInicio.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />

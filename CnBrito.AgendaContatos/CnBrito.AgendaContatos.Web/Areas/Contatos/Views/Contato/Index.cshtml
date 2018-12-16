@@ -40,17 +40,17 @@
     <script>
 
     $(document).ready(function () {
-        funcoesIndexTabs.listaAgenda($(".abaContatos"));
+        FuncoesIndexTabs.CarregaDivDaTab($(".abaContatos"));
     });
 
     $('#tabs a').click(function (e) {
         e.preventDefault();
-        funcoesIndexTabs.carregaDivDaTab(this);
+        FuncoesIndexTabs.CarregaDivDaTab(this);
     });
 
-    var funcoesIndexTabs = {
+    var FuncoesIndexTabs = {
 
-        carregaDivDaTab: function (object) {
+        CarregaDivDaTab: function (object) {
 
             var carregado = $(object).attr("carregado");
             var tabName = $(object).attr('name');
@@ -58,23 +58,24 @@
             if (tabName === 'tabContatos') {
 
                 if (carregado === undefined || carregado === "false") {
-                    funcoesIndexTabs.carregaContatos(object);
+                    FuncoesIndexTabs.CarregaContatos(object);
                 }
             }
             else if (tabName === 'tabConfiguracao') {
                 if (carregado === undefined || carregado === "false") {
-                    funcoesIndexTabs.carregaConfiguracao(object);
+                    FuncoesIndexTabs.CarregaConfiguracao(object);
                 }
             }
         },
 
-        carregaContatos: function (object) {
+        CarregaContatos: function (object) {
 
             $.ajax({
                 url: "@Url.Action("Listagem", "Contato")",
                 type: "GET",
                 success: function (result) {
 
+                    debugger;
                     if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
                         $('#tabContatos').html(result);
                         $(object).attr("carregado", "true");
@@ -97,7 +98,7 @@
             });
         },
 
-        carregaConfiguracao: function (object) {
+        CarregaConfiguracao: function (object) {
 
             $.ajax({
                 url: "@Url.Action("Index", "Configuracao", new { area = "Configuracao" })",

@@ -54,8 +54,8 @@ namespace CnBrito.AgendaContatos.DataAccess.Agenda
             {
                 return Mapper.Map<List<ContatoModel>>(
                         context.Contato.Where(f => f.IdUsuario == idUsuario)
-                                       .Include(c => c.Telefones.FirstOrDefault())
-                                       .Include(c => c.Emails.FirstOrDefault())
+                                       .Include(c => c.Telefones)
+                                       .Include(c => c.Emails)
                                        .ToList());
             }
         }
