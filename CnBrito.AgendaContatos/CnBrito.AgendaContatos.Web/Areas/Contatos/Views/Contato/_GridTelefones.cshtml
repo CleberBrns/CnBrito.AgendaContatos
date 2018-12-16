@@ -1,0 +1,55 @@
+﻿@*@model IList<CnBrito.AgendaContatos.Model.Agenda.TelefoneModel>*@
+
+@{
+    /**/
+
+    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;
+}
+
+@if (user != null)
+{
+    <div>
+
+        <div class="col-md-10 col-sm-10" style="overflow-x:auto; padding-top: 5%">
+            <table class="table table-striped" id="gridTelefones" carregada="false">
+                <thead>
+                    <tr>
+                        <th>Telefones</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@foreach (var itemModel in Model)*@
+                    @for (int i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td>(11) 99443-5550</td>
+                            <td class="text-center">
+                                <a class="btnExcluir" id-registro="@i"
+                                   title="Excluir" onclick="Contato.ExcluirTelefone(this)" style="cursor: pointer;">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+
+        $("#gridTelefones").DataTable({
+            "pageLength": 5,
+            "lengthChange": false,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json"
+            },
+            "columnDefs": [
+                { "targets": [1], "orderable": false, "searchable": false }
+            ],
+            "aaSorting": []
+        });
+
+    </script>
+}

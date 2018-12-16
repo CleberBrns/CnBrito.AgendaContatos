@@ -1,37 +1,112 @@
 ﻿@model CnBrito.AgendaContatos.Model.Agenda.ContatoModel
 
-@using (Html.BeginForm()) 
+@{
+    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;
+    var idUsuario = user != null ? user.Id : 0;
+}
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ContatoModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdUsuario);
+        <div class="campos" style="padding: 2% 0 2% 5%">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    <div>
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="text-left" style="padding-left: 17%">
+                <button type="button" class="btn btn-primary" id="btnSalvarContato"
+                        onclick="Contato.Salvar()">
+                    Salvar Nome Contato
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div id="dadosContato" style="padding-top: 2%; padding-left: 30%">
+                <div class="form-group">
+                    <div>
+                        @Html.Label("Dados Contato", htmlAttributes: new { @class = "control-label col-md-3" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    <input type="text" autocomplete="off" class="form-control" id="telefone" />
+                    <span class="field-validation-valid text-danger" id="validaTelefone" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="text-left" style="padding-left: 17%">
+                <button type="button" class="btn btn-primary" id="btnSalvarTelefone"
+                        onclick="Contato.SalvarTelefone()">
+                    Adicionar Telefone
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="form-group">
+                <div>@Html.Partial("_GridTelefones")</div>
+            </div>
+            <div class="form-group" style="padding-top: 5%">
+                @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    <input type="text" autocomplete="off" class="form-control" id="email" />
+                    <span class="field-validation-valid text-danger" id="validaEmail" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="text-left" style="padding-left: 17%">
+                <button type="button" class="btn btn-primary" id="btnSalvarEmail"
+                        onclick="Contato.SalvarEmail()" title="Incluir E-mail">
+                    Adicionar E-mail
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="form-group">
+                <div>@Html.Partial("_GridEmails")</div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="text-left col-md-10">
+                <button type="button" class="btn btn-primary" id="btnRetornar" name="btnRetornar"
+                        onclick="Contato.CloseModal()">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Retornar
+                </button>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<style>
+    .dialogWide > .modal-dialog {
+        width: 60% !important;        
+    }
+</style>
+
+<script>
+
+    @*if (@idUsuario == 0) {
+        $("#dadosContato").hide();
+    }
+    else {
+        $("#dadosContato").show();
+    }*@
+
+    var Contato = {
+
+        Salvar: function () {
+
+        }
+
+    }
+
+</script>

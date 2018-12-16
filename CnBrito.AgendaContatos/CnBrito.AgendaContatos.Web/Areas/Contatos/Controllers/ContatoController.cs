@@ -1,6 +1,5 @@
 ﻿using CnBrito.AgendaContatos.Business.Contract.Agenda;
 using CnBrito.AgendaContatos.Model.Agenda;
-using CnBrito.AgendaContatos.Model.Usuario;
 using CnBrito.AgendaContatos.Web.Controllers;
 using CnBrito.AgendaContatos.Web.Util;
 using System;
@@ -21,8 +20,7 @@ namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
         }
 
         #endregion
-
-        // GET: Contatos/Contato
+        
         public ActionResult Index()
         {
             var userInfo = GetUsuarioSession();
@@ -67,7 +65,17 @@ namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
 
         public ActionResult ModalCadastrar()
         {
-            return PartialView("_Gerenciar", new UsuarioModel());
+            var userInfo = GetUsuarioSession();
+            if (!userInfo.Item2)
+                return RedirectToAction("Login", "Login", new { area = "" });
+
+            ViewBag.Usuario = userInfo.Item1;
+            var novoContato = new ContatoModel
+            {
+                IdUsuario = userInfo.Item1.Id
+            };
+
+            return PartialView("_Gerenciar", novoContato);
         }
 
         public ActionResult ModalEditar(int id)

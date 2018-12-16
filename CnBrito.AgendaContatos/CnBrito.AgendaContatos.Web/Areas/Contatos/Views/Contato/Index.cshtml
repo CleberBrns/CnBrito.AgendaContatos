@@ -74,8 +74,7 @@
                 url: "@Url.Action("Listagem", "Contato")",
                 type: "GET",
                 success: function (result) {
-
-                    debugger;
+                    
                     if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
                         $('#tabContatos').html(result);
                         $(object).attr("carregado", "true");
