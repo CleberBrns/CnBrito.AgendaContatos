@@ -45,7 +45,8 @@
                         onclick="NovoUsuario.CloseModal()">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Retornar
                 </button>
-                <button type="button" class="btn btn-primary" id="btnSalvar">
+                <button type="button" class="btn btn-primary" id="btnSalvar" 
+                        onclick="NovoUsuario.Cadastrar()">
                     Salvar <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
                 </button>
             </div>
@@ -61,21 +62,9 @@
 
 <script>
 
-    $("#btnSalvar").on('click', function () {
-        NovoUsuario.Cadastrar();
-    });
-
     var NovoUsuario = {
 
         Cadastrar: function () {
-
-            debugger
-            var teste = $('form').serialize();
-
-            //Ajuste para impedir multiplos cliques
-            event.preventDefault();
-            var that = $(this);
-            that.off('click');
 
             $.ajax({
                 url: "@Url.Action("Cadastrar", "Usuario")",
@@ -124,8 +113,6 @@
                 error: function (jqXHR, textStatus, errorThrown) {
                     validacao.errorAjax(jqXHR, textStatus, errorThrown);
                 }
-            }).always(function () {
-                that.on('click', NovoUsuario.Cadastrar); //Devolve a ação do botão
             });
 
         },

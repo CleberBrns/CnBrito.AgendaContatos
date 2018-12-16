@@ -80,7 +80,7 @@ namespace CnBrito.AgendaContatos.Business.Usuarios
             }
             else
             {
-                if (model.Id != 0)
+                if (model.Id == 0)
                 {
                     model = _usuarioDataAccess.Salvar(model);
                     if (model.Id != 0)

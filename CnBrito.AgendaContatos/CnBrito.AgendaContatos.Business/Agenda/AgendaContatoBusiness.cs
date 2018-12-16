@@ -71,7 +71,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
             }
             else
             {
-                if (model.Id != 0)
+                if (model.Id == 0)
                 {
                     model = _contatoDataAccess.Salvar(model);
                     if (model.Id != 0)
@@ -160,7 +160,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
             }
             else
             {
-                if (model.Id != 0)
+                if (model.Id == 0)
                 {
                     model = _telefoneDataAccess.Salvar(model);
                     if (model.Id != 0)
@@ -248,7 +248,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
             }
             else
             {
-                if (model.Id != 0)
+                if (model.Id == 0)
                 {
                     model = _emailDataAccess.Salvar(model);
                     if (model.Id != 0)

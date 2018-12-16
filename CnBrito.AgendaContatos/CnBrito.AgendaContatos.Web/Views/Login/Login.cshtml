@@ -76,7 +76,7 @@
 
             $.ajax({
                 url: "@Url.Action("Autenticar", "Login")",
-                type: "GET",
+                type: "POST",
                 data: { model: usuario },
                 success: function (result) {
 

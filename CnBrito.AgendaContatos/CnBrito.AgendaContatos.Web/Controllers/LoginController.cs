@@ -31,7 +31,7 @@ namespace CnBrito.AgendaContatos.Web.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Autenticar(UsuarioModel model)
         {
             var mensagens = new Mensagens();            
