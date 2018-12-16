@@ -9,7 +9,7 @@ namespace CnBrito.AgendaContatos.Web.Controllers
             if (!GetUsuarioSession().Item2)
                 return RedirectToAction("Login", "Login");
 
-            return RedirectToAction("Index", "Inicio");
+            return RedirectToAction("Index", "Contato");
         }
     }
 }

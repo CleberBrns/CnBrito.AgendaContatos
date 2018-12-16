@@ -176,6 +176,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Contatos\ContatoAreaRegistration.cs" />
+    <Compile Include="Areas\Contatos\Controllers\ContatoController.cs" />
     <Compile Include="Areas\Usuario\Controllers\UsuarioController.cs" />
     <Compile Include="Areas\Usuario\UsuarioAreaRegistration.cs" />
     <Compile Include="Constants\ConstSessions.cs" />
@@ -394,6 +396,12 @@
     <Content Include="Areas\Usuario\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Usuario\Views\Usuario\Index.cshtml" />
     <Content Include="Areas\Usuario\Views\Usuario\_NovoUsuario.cshtml" />
+    <Content Include="Areas\Contatos\Views\Web.config" />
+    <Content Include="Areas\Contatos\Views\Contato\_GridContatos.cshtml" />
+    <Content Include="Areas\Contatos\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contatos\Views\Contato\_Listagem.cshtml" />
+    <Content Include="Areas\Contatos\Views\Contato\_Gerenciar.cshtml" />
+    <Content Include="Areas\Contatos\Views\Contato\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

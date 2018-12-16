@@ -26,7 +26,7 @@ namespace CnBrito.AgendaContatos.Web.Controllers
         public ActionResult Login()
         {
             if (GetUsuarioSession().Item2)
-                return RedirectToAction("Index", "Inicio");
+                return RedirectToAction("Index", "Contato");
 
             return View();
         }

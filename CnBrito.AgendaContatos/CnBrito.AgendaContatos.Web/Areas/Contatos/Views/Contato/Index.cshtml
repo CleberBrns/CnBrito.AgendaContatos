@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;
+}
+
+@if (user != null)
+{
+    <link href="~/Content/Default/tabsInicio.css" rel="stylesheet" />
+
+    <div class="container" style="width: 80%">
+        <div class="row well">
+            <div style="padding: 2%">
+                <div class="divInputs">
+                    <form>
+                        <ul id="tabs">
+                            <li>
+                                <a href="#" name="tabContatos" class="abaContatos" carregado="false">
+                                    Contatos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" name="tabConfiguracao" class="abaConfiguracao" carregado="false">
+                                    Configuração
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="content">
+                            <div id="tabContatos"></div>
+                            <div id="tabConfiguracao"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/Default/tabs.js"></script>
+
+    <script>
+
+    $(document).ready(function () {
+        funcoesIndexTabs.listaAgenda($(".abaContatos"));
+    });
+
+    $('#tabs a').click(function (e) {
+        e.preventDefault();
+        funcoesIndexTabs.carregaDivDaTab(this);
+    });
+
+    var funcoesIndexTabs = {
+
+        carregaDivDaTab: function (object) {
+
+            var carregado = $(object).attr("carregado");
+            var tabName = $(object).attr('name');
+
+            if (tabName === 'tabContatos') {
+
+                if (carregado === undefined || carregado === "false") {
+                    funcoesIndexTabs.carregaContatos(object);
+                }
+            }
+            else if (tabName === 'tabConfiguracao') {
+                if (carregado === undefined || carregado === "false") {
+                    funcoesIndexTabs.carregaConfiguracao(object);
+                }
+            }
+        },
+
+        carregaContatos: function (object) {
+
+            $.ajax({
+                url: "@Url.Action("Listagem", "Contato")",
+                type: "GET",
+                success: function (result) {
+
+                    if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
+                        $('#tabContatos').html(result);
+                        $(object).attr("carregado", "true");
+                    }
+                    else {
+                        var retorno = result.mensagensRetorno;
+                        swal({
+                            title: '',
+                            text: retorno.MensagemExibicao,
+                            type: 'warning',
+                            confirmButtonColor: '#10386B',
+                            allowOutsideClick: false
+                        });
+                        console.log(retorno.MensagemAnalise);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                }
+            });
+        },
+
+        carregaConfiguracao: function (object) {
+
+            $.ajax({
+                url: "@Url.Action("Index", "Configuracao", new { area = "Configuracao" })",
+                type: "GET",
+                success: function (result) {
+
+                    if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
+                        $('#tabConfiguracao').html(result);
+                        $(object).attr("carregado", "true");
+                    }
+                    else {
+                        var retorno = result.mensagensRetorno;
+                        swal({
+                            title: '',
+                            text: retorno.MensagemExibicao,
+                            type: 'warning',
+                            confirmButtonColor: '#10386B',
+                            allowOutsideClick: false
+                        });
+                        console.log(retorno.MensagemAnalise);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    validacao.errorAjax(jqXHR, textStatus, errorThrown);
+                }
+            });
+        }
+    };
+
+    </script>
+}
