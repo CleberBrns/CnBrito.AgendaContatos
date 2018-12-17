@@ -88,6 +88,8 @@ namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
             if (!userInfo.Item2)
                 return RedirectToAction("Login", "Login", new { area = "" });
 
+            ViewBag.Usuario = userInfo.Item1;
+
             string msgExibicao = string.Empty;
             string msgAnalise = string.Empty;
 
@@ -124,20 +126,21 @@ namespace CnBrito.AgendaContatos.Web.Areas.Contatos.Controllers
             if (!userInfo.Item2)
                 return RedirectToAction("Login", "Login", new { area = "" });
 
+            ViewBag.Usuario = userInfo.Item1;
+
             string msgExibicao = string.Empty;
             string msgAnalise = string.Empty;
 
             try
             {
-                var resultService = _agendaContatoBusiness.SalvarContato(model);
+                var resultService = _agendaContatoBusiness.SalvarContato(model);             
 
                 msgExibicao = resultService.Message;
                 msgAnalise = !resultService.Status ? "Falha!" : string.Empty;
 
                 if (resultService.Status)
-                {
                     return PartialView("_Gerenciar", resultService.Value);
-                }
+                
             }
             catch (Exception ex)
             {

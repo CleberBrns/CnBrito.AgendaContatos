@@ -68,7 +68,7 @@ namespace CnBrito.AgendaContatos.Web.Controllers
         {
             //Remove todas as sessões criadas
             Session.RemoveAll();
-            return RedirectToAction("Index", "Home");
+            return View("Login");
         }
 
     }

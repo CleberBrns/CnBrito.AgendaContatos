@@ -18,15 +18,21 @@
                                     Contatos
                                 </a>
                             </li>
-                            <li>
+                            @*<li>
                                 <a href="#" name="tabConfiguracao" class="abaConfiguracao" carregado="false">
                                     Configuração
+                                </a>
+                            </li>*@
+                            <li>
+                                <a href="#" name="tabSair" title="Sair do Sistema">
+                                    Sair <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                 </a>
                             </li>
                         </ul>
                         <div id="content">
                             <div id="tabContatos"></div>
-                            <div id="tabConfiguracao"></div>
+                            @*<div id="tabConfiguracao"></div>*@
+                            <div id="tabSair"></div>
                         </div>
                     </form>
                 </div>
@@ -66,6 +72,9 @@
                     FuncoesIndexTabs.CarregaConfiguracao(object);
                 }
             }
+            else if (tabName === 'tabSair') {
+                FuncoesIndexTabs.LogOut();
+            }
         },
 
         CarregaContatos: function (object) {
@@ -74,7 +83,7 @@
                 url: "@Url.Action("Listagem", "Contato")",
                 type: "GET",
                 success: function (result) {
-                    
+
                     if (result.mensagensRetorno === undefined || result.mensagensRetorno === null) {
                         $('#tabContatos').html(result);
                         $(object).attr("carregado", "true");
@@ -124,6 +133,11 @@
                     validacao.errorAjax(jqXHR, textStatus, errorThrown);
                 }
             });
+        },
+
+        LogOut: function () {
+            var url = href = "@Url.Action("Logout", "Login", new { area = ""  })";
+            window.location.href = url;
         }
     };
 

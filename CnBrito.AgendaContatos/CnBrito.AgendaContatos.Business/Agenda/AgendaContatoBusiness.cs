@@ -313,7 +313,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
 
             if (usuario != null && usuario.Id != model.Id)
             {
-                result.Message = "Nome já utilizado por outro contato, não é permitido sua reutilização";
+                result.Message = "Nome já utilizado, não é permitido sua reutilização";
                 result.Status = false;
                 registroExistente = true;
             }
@@ -330,7 +330,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
 
             if (usuario != null && usuario.Id != model.Id)
             {
-                result.Message = "Telefone já utilizado por outro contato, não é permitido sua reutilização";
+                result.Message = "Telefone já utilizado, não é permitido sua reutilização";
                 result.Status = false;
                 registroExistente = true;
             }
@@ -347,7 +347,7 @@ namespace CnBrito.AgendaContatos.Business.Agenda
 
             if (usuario != null && usuario.Id != model.Id)
             {
-                result.Message = "Email já utilizado por outro contato, não é permitido sua reutilização";
+                result.Message = "Email já utilizado, não é permitido sua reutilização";
                 result.Status = false;
                 registroExistente = true;
             }

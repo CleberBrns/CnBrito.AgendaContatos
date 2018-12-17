@@ -1,13 +1,13 @@
 ﻿@model CnBrito.AgendaContatos.Model.Agenda.ContatoModel
 
 @{
-    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;  
+    var user = (CnBrito.AgendaContatos.Model.Usuario.UsuarioModel)ViewBag.Usuario;
 }
 
 @using (Html.BeginForm())
 {
 
-<script src="~/Scripts/Mask/jquery.mask.js"></script>
+    <script src="~/Scripts/Mask/jquery.mask.js"></script>
 
     @Html.AntiForgeryToken()
 
@@ -33,60 +33,56 @@
                 </button>
             </div>
 
-            <div id="dadosContato" style="display: none">
+            @if (Model.Id != 0)
+            {
+                <div id="dadosContato">
 
-                <div style="padding-top: 2%; padding-left: 30%">
-                    <div class="form-group">
-                        <div>
-                            @Html.Label("Dados Contato", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div style="padding-top: 2%; padding-left: 30%">
+                        <div class="form-group">
+                            <div>
+                                @Html.Label("Dados Contato", htmlAttributes: new { @class = "control-label col-md-3" })
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        <input type="text" autocomplete="off" class="form-control" id="telefone" />
-                        <span class="field-validation-valid text-danger" id="validaTelefone" data-valmsg-replace="true"></span>
-                    </div>
-                </div>
-                <div class="text-left" style="padding-left: 17%">
-                    <button type="button" class="btn btn-primary" onclick="Contato.SalvaTelefone()">
-                        Adicionar Telefone
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                </div>
-                @if (Model.Id != 0)
-                {
                     <div class="form-group">
-
+                        @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <input type="text" autocomplete="off" class="form-control" id="telefone" />
+                            <span class="field-validation-valid text-danger" id="validaTelefone" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="text-left" style="padding-left: 17%">
+                        <button type="button" class="btn btn-primary" onclick="Contato.SalvaTelefone()">
+                            Adicionar Telefone
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="form-group">
                         <div id="divGridTelefones">@Html.Partial("_GridTelefones", Model.Telefones)</div>
                         <div id="divGridTelefonesLoad" />
-
                     </div>
-                }
-                <div class="form-group" style="padding-top: 5%">
-                    @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-8">
-                        <input type="text" autocomplete="off" class="form-control" id="email" />
-                        <span class="field-validation-valid text-danger" id="validaEmail" data-valmsg-replace="true"></span>
+                    <div class="form-group" style="padding-top: 5%">
+                        @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-8">
+                            <input type="text" autocomplete="off" class="form-control" id="email" />
+                            <span class="field-validation-valid text-danger" id="validaEmail" data-valmsg-replace="true"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="text-left" style="padding-left: 17%">
-                    <button type="button" class="btn btn-primary" id="btnSalvarEmail"
-                            onclick="Contato.SalvarEmail()" title="Incluir E-mail">
-                        Adicionar E-mail
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                </div>
-                @if (Model.Id != 0)
-                {
+                    <div class="text-left" style="padding-left: 17%">
+                        <button type="button" class="btn btn-primary" id="btnSalvarEmail"
+                                onclick="Contato.SalvaEmail()" title="Incluir E-mail">
+                            Adicionar E-mail
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
+                    </div>
                     <div class="form-group">
                         <div id="divGridEmails">@Html.Partial("_GridEmails", Model.Emails)</div>
                         <div id="divGridEmailsLoad" />
                     </div>
-                }
-            </div>
+                </div>
+            }
+
         </div>
 
         <div class="form-group">
@@ -102,11 +98,18 @@
 
 <style>
     .dialogWide > .modal-dialog {
-        width: 60% !important;        
+        width: 60% !important;
     }
 </style>
 
 <script>
+
+    $(document).on('keyup keypress', 'form input[type="text"]', function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
 
     var SPMaskBehavior = function (val) {
         return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
@@ -117,13 +120,19 @@
             }
         };
     $("#telefone").mask(SPMaskBehavior, spOptions);
-   
-    if ($("#idContato").val() == 0) {
-        $("#dadosContato").hide();
-    }
-    else {
-        $("#dadosContato").show();
-    }
+
+    $(".close").on("click", function () {
+        Contato.CloseModal();
+    });
+
+    $("#nome").keyup(function (e) {
+        debugger;
+        if (e.keyCode === 13) {
+            if (Contato.ValidaNome()) {
+                Contato.SalvaNome();
+            }
+        }
+    });
 
     var Contato = {
 
@@ -183,7 +192,7 @@
                                     confirmButtonColor: '#10386B',
                                     allowOutsideClick: false
                                 }).then(function () {
-                                    $("#dadosContato").show();
+
                                 });
                             }
                             else {
@@ -196,9 +205,9 @@
                                     allowOutsideClick: false
                                 });
                                 console.log(retorno.MensagemAnalise);
-                            }    
+                            }
 
-                        }                                           
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         validacao.errorAjax(jqXHR, textStatus, errorThrown);
@@ -211,7 +220,7 @@
         CarregaTelefones: function () {
 
             var idContato = $("#idContato").val();
-            
+
             $.ajax({
                 url: "@Url.Action("ListarTelefonesContato", "Telefone")",
                 data: { idContato: idContato },
@@ -260,7 +269,7 @@
         SalvaTelefone: function () {
 
             if (Contato.ValidaTelefone()) {
-                
+
                 var telefone = {
                     IdContato: $("#idContato").val(),
                     Numero: $("#telefone").val()
@@ -282,6 +291,7 @@
                                 confirmButtonColor: '#10386B',
                                 allowOutsideClick: false
                             }).then(function () {
+                                $("#telefone").val('');
                                 Contato.CarregaTelefones();
                             });
                         }
@@ -296,7 +306,7 @@
                             });
                             console.log(retorno.MensagemAnalise);
                         }
-                                                              
+
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         validacao.errorAjax(jqXHR, textStatus, errorThrown);
@@ -438,7 +448,8 @@
                                 confirmButtonColor: '#10386B',
                                 allowOutsideClick: false
                             }).then(function () {
-                                Contato.CarregaTelefones();
+                                $("#email").val('');
+                                Contato.CarregaEmails();
                             });
                         }
                         else {
@@ -452,7 +463,7 @@
                             });
                             console.log(retorno.MensagemAnalise);
                         }
-                                                              
+
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         validacao.errorAjax(jqXHR, textStatus, errorThrown);

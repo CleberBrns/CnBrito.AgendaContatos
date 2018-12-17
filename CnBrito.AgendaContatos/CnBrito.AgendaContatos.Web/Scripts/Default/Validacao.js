@@ -181,7 +181,7 @@ var validacao = {
             if (regex.test(email)) {
                 return true;
             } else {
-                $(fieldErro).html("Este endereço de email não é válido!");
+                $(fieldErro).html("Endereço de E-mail inválido!");
                 return false;
             }
         } 
